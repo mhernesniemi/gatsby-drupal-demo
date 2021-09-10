@@ -2,13 +2,21 @@ import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 const Article = ({ data }) => {
   const post = data.nodeArticle
 
+  const image = getImage(
+    post.relationships.field_media_image.relationships.field_media_image
+      .localFile
+  )
+
   return (
     <Layout>
       <h1>{post.title}</h1>
+      <GatsbyImage image={image} alt="hello" />
+
       <div dangerouslySetInnerHTML={{ __html: post.body.processed }} />
     </Layout>
   )
@@ -34,7 +42,13 @@ export const query = graphql`
           relationships {
             field_media_image {
               localFile {
-                publicURL
+                childImageSharp {
+                  gatsbyImageData(
+                    width: 500
+                    placeholder: DOMINANT_COLOR
+                    formats: [AUTO, WEBP, AVIF]
+                  )
+                }
               }
             }
           }
