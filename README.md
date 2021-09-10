@@ -2,6 +2,6 @@
 
 run these commands:
 
-yarn install
+- yarn install
 
-gatsby develop
+- gatsby develop (requires gatsby-cli installed)
