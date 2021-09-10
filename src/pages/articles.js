@@ -1,8 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import Layout from "../components/layout"
-// import Seo from "../components/seo"
+import ArticleLiftUp from "../components/ArticleLiftUp"
 
 const Articles = ({ data }) => {
   const articles = data.allNodeArticle.nodes
@@ -11,9 +11,7 @@ const Articles = ({ data }) => {
     <Layout>
       <h1>Articles</h1>
       {articles.map((article, index) => (
-        <div key={index}>
-          <Link to={article.path.alias}>{article.title}</Link>
-        </div>
+        <ArticleLiftUp title={article.title} path={article.path.alias} />
       ))}
     </Layout>
   )
